@@ -22,7 +22,7 @@ After installation, the extension commands are available from the Command Palett
 ## Use
 
 1. Open a tracked file in a Git repository.
-2. Run Squash Merge Attribution: Open PR Commit Viewer from the Command Palette.
+2. Run Squash Merge PR Attribution: Open File History from the Command Palette.
 3. Wait for the progress line to report that original PR commits are ready.
 4. Select a version on the left to see the original Git commit author and that commit's exact diff for the active file.
 

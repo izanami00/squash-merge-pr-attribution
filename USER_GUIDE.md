@@ -24,11 +24,11 @@ The left pane's Author field is the original Git commit author. It is not the Gi
 1. Open the repository folder in VS Code.
 2. Open the file to investigate in a normal editor tab.
 3. Open the Command Palette with Ctrl+Shift+P.
-4. Run Squash Merge Attribution: Open PR Commit Viewer.
+4. Run Squash Merge PR Attribution: Open File History.
 5. Keep the viewer open while the status line progresses through history reading, PR retrieval, and commit indexing.
 6. Select an entry from the version list to view its change.
 
-Use the Refresh button in the viewer, or run Squash Merge Attribution: Refresh PR Commit Viewer, when the branch history or remote PR refs may have changed. Refresh intentionally fetches every discovered PR ref again; ordinary opens reuse locally stored PR refs and fetch only refs that are absent.
+Use the Refresh button in the viewer, or run Squash Merge PR Attribution: Refresh, when the branch history or remote PR refs may have changed. Refresh intentionally fetches every discovered PR ref again; ordinary opens reuse locally stored PR refs and fetch only refs that are absent.
 
 ## Progress and diagnostics
 

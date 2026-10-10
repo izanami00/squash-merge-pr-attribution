@@ -2,7 +2,7 @@
   "name": "squash-merge-pr-attribution",
   "displayName": "Squash Merge PR Attribution",
   "description": "Recover the original PR commit authors and file diffs hidden by GitHub squash merges.",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "license": "MIT",
   "icon": "icon.png",
   "publisher": "treehouse00",
@@ -27,13 +27,13 @@
     "commands": [
       {
         "command": "squashMergePrAttribution.open",
-        "title": "Squash Merge Attribution: Open PR Commit Viewer",
-        "category": "Squash Merge Attribution"
+        "title": "Open File History",
+        "category": "Squash Merge PR Attribution"
       },
       {
         "command": "squashMergePrAttribution.refresh",
-        "title": "Squash Merge Attribution: Refresh PR Commit Viewer",
-        "category": "Squash Merge Attribution"
+        "title": "Refresh",
+        "category": "Squash Merge PR Attribution"
       }
     ],
     "configuration": {
