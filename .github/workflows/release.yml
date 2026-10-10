@@ -2,16 +2,6 @@ name: Build and publish GitHub Release
 
 on:
   workflow_dispatch:
-    inputs:
-      tag:
-        description: Release tag. It must match package.json, for example v0.2.5.
-        required: true
-        type: string
-      prerelease:
-        description: Mark this GitHub Release as a pre-release.
-        required: false
-        default: false
-        type: boolean
 
 permissions:
   contents: write
@@ -38,17 +28,22 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Validate release tag
+      - name: Read release metadata from package.json
+        id: release
         shell: bash
-        env:
-          RELEASE_TAG: ${{ inputs.tag }}
         run: |
           package_version="$(node --print \"require('./package.json').version\")"
-          expected_tag="v$package_version"
-          test "$RELEASE_TAG" = "$expected_tag" || {
-            echo "Release tag must be $expected_tag; received $RELEASE_TAG."
-            exit 1
-          }
+          release_tag="v$package_version"
+          echo "version=$package_version" >> "$GITHUB_OUTPUT"
+          echo "tag=$release_tag" >> "$GITHUB_OUTPUT"
+
+          if [[ "$package_version" == *-* ]]; then
+            echo "prerelease=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "prerelease=false" >> "$GITHUB_OUTPUT"
+          fi
+
+          echo "Preparing GitHub Release $release_tag."
 
       - name: Build VSIX
         run: npm run package
@@ -57,15 +52,16 @@ jobs:
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
-          RELEASE_TAG: ${{ inputs.tag }}
-          IS_PRERELEASE: ${{ inputs.prerelease }}
+          RELEASE_TAG: ${{ steps.release.outputs.tag }}
+          RELEASE_VERSION: ${{ steps.release.outputs.version }}
+          IS_PRERELEASE: ${{ steps.release.outputs.prerelease }}
         run: |
           if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
             echo "A GitHub Release already exists for $RELEASE_TAG."
             exit 1
           fi
 
-          release_args=("$RELEASE_TAG" "dist"/*.vsix --target "$GITHUB_SHA" --title "Squash Merge PR Attribution ${RELEASE_TAG#v}" --generate-notes)
+          release_args=("$RELEASE_TAG" "dist"/*.vsix --target "$GITHUB_SHA" --title "Squash Merge PR Attribution $RELEASE_VERSION" --generate-notes)
           if [ "$IS_PRERELEASE" = "true" ]; then
             release_args+=(--prerelease)
           fi

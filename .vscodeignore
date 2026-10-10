@@ -1,5 +1,6 @@
 .vscode
 .github/
 .gitignore
+PROJECT_README.md
 scripts/
 node_modules
