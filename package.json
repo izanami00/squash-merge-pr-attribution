@@ -1,0 +1,63 @@
+{
+  "name": "squash-merge-pr-attribution",
+  "displayName": "Squash Merge PR Attribution",
+  "description": "Recover the original PR commit authors and file diffs hidden by GitHub squash merges.",
+  "version": "0.2.3",
+  "license": "MIT",
+  "icon": "icon.png",
+  "publisher": "treehouse00",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "SCM Providers",
+    "Other"
+  ],
+  "main": "./extension.js",
+  "activationEvents": [
+    "onCommand:squashMergePrAttribution.open",
+    "onCommand:squashMergePrAttribution.refresh"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "squashMergePrAttribution.open",
+        "title": "Squash Merge Attribution: Open PR Commit Viewer",
+        "category": "Squash Merge Attribution"
+      },
+      {
+        "command": "squashMergePrAttribution.refresh",
+        "title": "Squash Merge Attribution: Refresh PR Commit Viewer",
+        "category": "Squash Merge Attribution"
+      }
+    ],
+    "configuration": {
+      "title": "Squash Merge PR Attribution",
+      "properties": {
+        "squashMergePrAttribution.remote": {
+          "type": "string",
+          "default": "origin",
+          "description": "Git remote used to retrieve original GitHub pull request refs."
+        },
+        "squashMergePrAttribution.diffCacheEntries": {
+          "type": "number",
+          "default": 80,
+          "minimum": 1,
+          "maximum": 500,
+          "description": "Maximum number of lazily loaded file diffs to keep in memory."
+        },
+        "squashMergePrAttribution.prFetchBatchSize": {
+          "type": "number",
+          "default": 25,
+          "minimum": 1,
+          "maximum": 100,
+          "description": "Number of pull request refs fetched in one Git command."
+        }
+      }
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.1",
+    "@types/vscode": "^1.85.0"
+  }
+}
