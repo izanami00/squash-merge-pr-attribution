@@ -30,6 +30,14 @@ The extension uses the Git author recorded on each original commit. It does not 
 
 On ordinary opens, locally cached PR refs are reused and only missing refs are fetched. Use Refresh only when you intentionally want to refetch every discovered PR ref from the remote.
 
+## Package
+
+Build a local installable VSIX with:
+
+    npm run package
+
+The command writes a versioned package to `dist/squash-merge-pr-attribution-VERSION.vsix`. The `dist` directory is intentionally excluded from Git.
+
 ## Requirements and limits
 
 - Git must be available on PATH in the VS Code extension host environment.
