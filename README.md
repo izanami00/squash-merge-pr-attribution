@@ -38,6 +38,10 @@ Build a local installable VSIX with:
 
 The command writes a versioned package to `dist/squash-merge-pr-attribution-VERSION.vsix`. The `dist` directory is intentionally excluded from Git.
 
+## Create a GitHub Release
+
+The **Build and publish GitHub Release** workflow is intentionally manual. In the repository's **Actions** page, select that workflow, click **Run workflow**, enter the tag matching `package.json` (for example, `v0.2.5`), and run it from the intended branch. It validates the version, builds the VSIX, creates the tag and GitHub Release, and uploads the VSIX as the release asset.
+
 ## Requirements and limits
 
 - Git must be available on PATH in the VS Code extension host environment.
